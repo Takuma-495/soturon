@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  19 SEP 2024 17:32
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  22 OCT 2024 15:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -158,64 +158,64 @@ File: l3backend-dvipdfmx.def 2022-01-12 L3 backend support: dvipdfmx
 ) (./soturon.aux)
 \openout1 = `soturon.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
  (I search kanjifont definition file: .
 . )
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 22.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 23.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 22.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 23.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <24.88> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 22.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 23.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <24.88> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 22.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 23.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 23.
 
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 23.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <20.74> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 22.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 23.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 22.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 23.
  [1
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 27.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 28.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 27.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 28.
  (./soturon.toc)
 \tf@toc=\write3
 \openout3 = `soturon.toc'.
 
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 28.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 29.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 28.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 29.
 
 [1
 
@@ -226,27 +226,31 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 3.
 ) [1
 
-] (./svm.tex) [2
+] (./svm.tex [2
 
-] (./abc.tex) [3
+]) [3] (./abc.tex [4
 
-] (./method.tex) [4
+] [5]) [6] (./method.tex) [7
+
+] (./result.tex) [8
+
+] (./kousatu.tex) [9
+
+] (./end.tex) [10
+
+] [11
+
+] [12
 
 ]
-(./result.tex) [5
-
-] (./end.tex) [6
-
-] [7
-
-] (./soturon.aux) ) 
+(./soturon.aux) ) 
 Here is how much of TeX's memory you used:
- 2507 strings out of 479850
- 36147 string characters out of 5887378
- 327097 words of memory out of 5000000
- 20795 multiletter control sequences out of 15000+600000
- 500078 words of font info for 150 fonts, out of 8000000 for 9000
+ 2526 strings out of 479850
+ 36320 string characters out of 5887378
+ 332119 words of memory out of 5000000
+ 20809 multiletter control sequences out of 15000+600000
+ 500456 words of font info for 152 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
- 55i,11n,62p,252b,331s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,21n,62p,252b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on soturon.dvi (9 pages, 5628 bytes).
+Output written on soturon.dvi (14 pages, 19492 bytes).

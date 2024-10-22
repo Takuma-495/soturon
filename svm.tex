@@ -1,2 +1,51 @@
 \section{サポートベクトルマシン(SVM)}
-内容1
+SVMは1995年にCortesらによって提案された機械学習アルゴリズムである[\cite{svm}]．
+SVMの概略図を図？に示す．
+SVMは，訓練サンプル集合からデータを分類する識別関数を学習するアルゴリズムである．
+この学習過程において，SVMは訓練データの中で識別関数に近いデータであるサポートベクトルを得る．
+そして，サポートベクトルと識別関数との距離，すなわちマージンを最大化するように識別関数を構築する．
+これにより，SVMは新しいデータを分類する際，
+最大限のマージンを持ってデータを分類できるようになり，
+未知のデータに対しても誤分類のリスクを最小限に抑えることができる．
+
+2値分類の場合，線形な識別関数は(\ref{decision})式のように定義される．ここで$\boldsymbol{x}$は入力ベクトル,
+ $\boldsymbol{w}$, $b$は識別関数のパラメータである．
+\begin{align}
+    \label{decision}
+f(\boldsymbol{x}) = \boldsymbol{w}^T \boldsymbol{x} + b
+\end{align}
+クラス$K_1$,$K_2$を以下のデータの集合と定義し，それぞれ1, -1とラベル付けすると，
+\begin{align*}
+    K_1:\boldsymbol{w}^T \boldsymbol{x}_i + b > 0\\
+    K_2:\boldsymbol{w}^T \boldsymbol{x}_i + b < 0
+\end{align*}
+すべての学習サンプル$\boldsymbol{x}_i(i=1,...,n)$について(\ref{learn})式の条件を満たすように
+$\boldsymbol{w}$, $b$を調節する事がSVMの学習フェーズとなる．
+\begin{align}
+    \label{learn}
+    f(\boldsymbol{x}) = \boldsymbol{w}^T \boldsymbol{x}_i + b =
+    \begin{cases}
+        \geq 1&  \boldsymbol{x}_i \in K_1 \\
+        \leq  -1& \boldsymbol{x}_i \in K_2
+    \end{cases}
+\end{align}
+誤分類を許容せずに決定境界を求める場合をハードマージン
+
+許容する場合をソフトマージン
+
+d次元特徴ベクトルをd`次元特徴空間に写像する
+
+→このときの関数
+
+カーネルトリック
+
+本論文で使うカーネル関数を列挙
+
+データの正規化
+
+一対一法と一対他法について
+
+→一対他法を使う
+
+
+
