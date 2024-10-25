@@ -1,6 +1,6 @@
 \section{サポートベクトルマシン(SVM)}
 SVMは1995年にCortesらによって提案された機械学習アルゴリズムである[\cite{svm}]．
-SVMの概略図を図？に示す．
+SVMは教師あり学習を用いる2値分類器であるが、多クラスへの拡張も可能である．
 SVMは，訓練サンプル集合からデータを分類する識別関数を学習するアルゴリズムである．
 この学習過程において，SVMは訓練データの中で識別関数に近いデータであるサポートベクトルを得る．
 そして，サポートベクトルと識別関数との距離，すなわちマージンを最大化するように識別関数を構築する．
@@ -8,18 +8,17 @@ SVMは，訓練サンプル集合からデータを分類する識別関数を�
 最大限のマージンを持ってデータを分類できるようになり，
 未知のデータに対しても誤分類のリスクを最小限に抑えることができる．
 \subsection{ハードマージンSVM}
-2値分類の場合，線形な識別関数は(\ref{decision})式のように定義される．ここで$\boldsymbol{x}$は入力ベクトル,
- $\boldsymbol{w}$, $b$は識別関数のパラメータである．
+$n$個の$N$次元教師データ$\boldsymbol{x}_i(i=1,...,n)$，
+がクラス$K_1$,$K_2$の2値分類データであるとして，
+対応するクラスラベルをクラス$K_1$の時に$y_i= 1$,
+クラス$K_2$の時に$y_i= -1$,とするとデータが線形分離可能であれば，
+識別関数は(\ref{decision})式のように定義される．
+ $\boldsymbol{w}$は$m$次元ベクトル, $b$は識別関数のパラメータである．
 \begin{align}
     \label{decision}
 f(\boldsymbol{x}) = \boldsymbol{w}^T \boldsymbol{x} + b
 \end{align}
-クラス$K_1$,$K_2$を以下のデータの集合と定義し，それぞれ1, -1とラベル付けすると，
-\begin{align*}
-    K_1:\boldsymbol{w}^T \boldsymbol{x}_i + b > 0\\
-    K_2:\boldsymbol{w}^T \boldsymbol{x}_i + b < 0
-\end{align*}
-すべての学習サンプル$\boldsymbol{x}_i(i=1,...,n)$について(\ref{learn})式の条件を満たすように
+すべての教師データ$\boldsymbol{x}_i(i=1,...,n)$について(\ref{learn})式の条件を満たすように
 $\boldsymbol{w}$, $b$を調節する事がSVMの学習フェーズとなる．
 \begin{align}
     \label{learn}
@@ -29,18 +28,185 @@ $\boldsymbol{w}$, $b$を調節する事がSVMの学習フェーズとなる．
         \leq  -1& \boldsymbol{x}_i \in K_2
     \end{cases}
 \end{align}
-誤分類を許容せずに決定境界を求める場合をハードマージン
-
-許容する場合をソフトマージン
+このとき，(\ref{learn})式は(\ref{equal})式と等価になる．
+\begin{align}
+    \label{equal}
+    y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b) \geq 1
+\end{align}
+ここにサポートベクトルと超平面（線）の図\\
+ここで図??にデータを分離する超平面(2次元では直線)を示す．
+分離超平面とそれに最も近いデータ(サポートベクトル)との距離をマージンと呼び，
+SVMはマージンを最大化するように分離超平面を求める．
+マージンを最大化することで，
+サポートベクトルから少しずれたデータが存在しても分類可能になり，
+モデルの汎化性能が向上する．
+次に，マージンを最大化する超平面を求める方法を導く．
+$\boldsymbol{x}_i$から超平面への距離を$d$とすると，
+$d$は(\ref{distance})式のようになる．
+\begin{align}
+    \label{distance}
+d = \dfrac{|f(\boldsymbol{x_i})|}{\|\boldsymbol{w}\| }
+\end{align}
+よって，マージンを$M$とすると，
+マージン最大化は(\ref{margin})式の最適化問題によって表現できる
+\begin{align}
+    \label{margin}
+    \underset{{\boldsymbol{w},b}}{\text{max}}~M,~~ \text{subject to } \dfrac{y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)}{\|\boldsymbol{w}\|}
+    \geq M ~~  (i=1,...,n)
+\end{align}
+さらに，(\ref{margin})式の制約条件部分を$M$で割り，
+$\frac{\boldsymbol{w}}{M\|\boldsymbol{w}\|}$と
+$\frac{b}{M\|\boldsymbol{w}\|}$
+をそれぞれ$\tilde{w}$,$\tilde{b}$
+とすると制約条件は(\ref{chmargin})式に書き換えられる．
+\begin{align}
+    \label{chmargin}
+    y_i(\boldsymbol{\tilde{w}}^T \boldsymbol{x}_i + \tilde{b}) \geq 1
+\end{align}
+(\ref{chmargin})式の等号が成立するデータ
+$\boldsymbol{x_i}$は分離超平面と距離が最も近いデータ，
+すなわちサポートベクトルである．
+したがってマージン$\tilde{M}$は(\ref{newmargin})式のようになる
+\begin{align}
+    \label{newmargin}
+   \tilde{M} = \dfrac{1}{\|\boldsymbol{\tilde{w}}\|}
+\end{align}
+よって(\ref{margin})式は(\ref{finalmargin})式で表すことができる．
+\begin{align}
+    \label{finalmargin}
+    \underset{\boldsymbol{\tilde{w}},\tilde{b}}{\text{max}}~\dfrac{1}{\|\boldsymbol{\tilde{w}}\|},
+  ~~ \text{subject to } y_i(\boldsymbol{\tilde{w}}^T \boldsymbol{x}_i + \tilde{b}) \geq 1~~  (i=1,...,n)
+\end{align}
+$\|\boldsymbol{\tilde{w}}\|$は正であるため，
+$\frac{1}{\|\boldsymbol{\tilde{w}}\|}$を最大化する問題は，
+${\|\boldsymbol{\tilde{w}}\|}^2$を最小化する問題に等しい．
+$\boldsymbol{\tilde{w}}$，$\tilde{b}$を改めて$\boldsymbol{w}$，$b$と表記すると
+(\ref{finalmargin})式は(\ref{minmargin})式に書き換えられ，
+マージン最大化は(\ref{minmargin})式を解く問題に帰着できる．
+\begin{align}
+    \label{minmargin}
+    \underset{\boldsymbol{w},b}{\text{min}}~\dfrac{1}{2}{\|\boldsymbol{{w}}\|}^2,
+  ~~ \text{subject to } y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b) \geq 1~~  (i=1,...,n)
+\end{align}
+さらに，制約付き最適化問題である(\ref{minmargin})式を
+ラグランジュの未定乗数法により，双対問題に置き換える．
+ラグランジュ乗数$\boldsymbol{\alpha} = (\alpha_1,...,\alpha_n)^T$を用いて
+ラグランジュ関数$L$を(\ref{lag})式と定義する．
+\begin{align}
+    \label{lag}
+    L(\boldsymbol{w},b,\boldsymbol{\alpha}) 
+    = \dfrac{1}{2}{\|\boldsymbol{{w}}\|}^2
+    - \sum_{n = 1}^{n} \alpha_i \{y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)-1\}
+\end{align}
+制約条件が不等式であるため，$\boldsymbol{w}$の最適解のおいて以下のKKT条件が適用できる．
+\begin{subequations}
+\begin{align}
+   \frac{\partial L(\boldsymbol{w},b,\boldsymbol{\alpha})}{\partial \boldsymbol{w}} = 0\label{w}\\
+    \frac{\partial L(\boldsymbol{w},b,\boldsymbol{\alpha})}{\partial \boldsymbol{b}} = 0\label{b}\\
+    y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)-1 = 0\label{Support}\\
+    \alpha_i \geq 0
+\end{align}
+\end{subequations}
+(\ref{Support})式より，$\alpha_i = 0$または$\alpha_i > 0$で$y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)=1$
+が満たされなければならない．ここで，$\alpha_i > 0$となる$\boldsymbol{x_i}$をサポートベクトルと呼ぶ．
+SVMは，教師データ中から，サポートベクトルのみを用いて識別関数を構成する．
+ (\ref{w})式， (\ref{b})式を計算すると，それぞれ(\ref{w2})式， (\ref{b2})式になる．
+ \begin{subequations}
+ \begin{align}
+   \boldsymbol{w} = \sum_{i=1}^{n}\alpha_i y_i \boldsymbol{w_i} \label{w2}\\
+   \sum_{i=1}^{n}\alpha_i y_i = 0 \label{b2}
+ \end{align}
+\end{subequations}
+(\ref{w2})式， (\ref{b2})式を(\ref{lag})式に代入すると，
+$\boldsymbol{\alpha}$のみで表されるハードマージンの双対問題が得られる．
+これは線形分離可能な場合のみに適用でき，誤分類を許容しない．
+\begin{align}
+    \underset{\boldsymbol{a}}{\text{max}} \left\{\tilde{L}(\boldsymbol{\alpha}) 
+    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}
+    \alpha_i\alpha_j y_i y_j \boldsymbol{x_i}^T \boldsymbol{x_j}\right\} \nonumber \\
+    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0, \alpha_i \geq 0,\ (i=1,...,n)
+\end{align}
+ここで，サポートベクトルに対応する添字の集合をSとすると，(\ref{w2})式より，
+識別関数は(\ref{s.decision})式になる．
+\begin{align}
+    \label{s.decision}
+    D(\boldsymbol{x}) = \sum_{i\in S}a_iy_i\boldsymbol{x_i}^T\boldsymbol{x} + b
+\end{align}
+また，(\ref{Support})式より，$b$は(\ref{finalb})式になる．
+\begin{align}
+  \label{finalb}
+  b =y_i - \boldsymbol{x_i}^T\boldsymbol{x}(i \in S)
+\end{align}
+(\ref{s.decision})，(\ref{finalb})より得られた識別関数により，
+$\boldsymbol{x}$は$D(\boldsymbol{x}) > 0$ならクラス$K_1$に，
+$D(\boldsymbol{x}) < 0$ならクラス$K_2$に分類する．
 
 \subsection{ソフトマージンSVM}
+2.1節で述べたハードマージンSVMは線形分離可能なことを前提としているが，現実の問題は非線形な問題が多い．
+そこで非線形な問題に対しても適応できるように，(\ref{equal})式に非負の変数$\xi_i(\geq 0)$を導入する．
+その式を(\ref{soft})式に示す．
+\begin{align}
+    \label{soft}
+    y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b) \geq 1 - \xi_i
+\end{align}
+これにより，マージンの内側にデータが存在することを許容する．
+このときソフトマージンの最適化問題は，(\ref{soft1})式，(\ref{soft2})式になる．
+ここで$C$は誤分類をどれだけ許容するかを決めるハイパーパラメータであり，
+小さいほど誤分類を許容し，大きいほど誤分類を許容しない．よって
+この問題は，(\ref{soft1})式の第１項のマージン最大化と
+第２項の誤分類の許容数のバランスを図る問題である．
+\begin{align}
+    \underset{\boldsymbol{w},b,\boldsymbol{\xi}}{\text{min}}~\dfrac{1}{2}{\|\boldsymbol{{w}}\|}^2
+    &+C\sum_{i=1}^{n}\xi_i \label{soft1}\\
+   \text{subject to } y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b) \geq &1 - \xi_i,\xi_i \geq 0 ~(i=1,...,n)\label{soft2}
+\end{align}
+2.1節と同様に，(\ref{soft1})式，(\ref{soft2})式を主問題として，ラグランジュの未定乗数法により双対問題を導出する．
+ラグランジュ乗数$\boldsymbol{\alpha} = (\alpha_1,...,\alpha_n)^T$，
+$\boldsymbol{\beta} = (\beta_1,...,\beta_n)^T$を用いて
+ラグランジュ関数$L$を(\ref{slag})式と定義する．
+\begin{align}
+    \label{slag}
+    L(\boldsymbol{w},b,\boldsymbol{\xi},\boldsymbol{\alpha},\boldsymbol{\beta}) 
+    = \dfrac{1}{2}{\|\boldsymbol{{w}}\|}^2+C\sum_{i=1}^{n}\xi_i
+    - \sum_{n = 1}^{n} \alpha_i \{y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)-1+\xi_i\}
+    -\sum_{i=1}^{n}\beta_i\xi_i
+\end{align}
+制約条件が不等式であるため，$\boldsymbol{w}$の最適解のおいて以下のKKT条件が適用できる．
+\begin{subequations}
+\begin{align}
+   \frac{\partial L(\boldsymbol{w},b,\boldsymbol{\xi},\boldsymbol{\alpha},\boldsymbol{\beta})}{\partial \boldsymbol{w}} = 0\label{sw}\\
+    \frac{\partial L(\boldsymbol{w},b,\boldsymbol{\xi},\boldsymbol{\alpha},\boldsymbol{\beta})}{\partial \boldsymbol{b}} = 0\label{sb}\\
+    \frac{\partial L(\boldsymbol{w},b,\boldsymbol{\xi},\boldsymbol{\alpha},\boldsymbol{\beta})}{\partial \boldsymbol{\xi}} = 0\label{sxi}\\
+    \alpha_i \{y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)-1+\xi_i\}=0\label{sSupport}\\
+    \beta_i\xi_i = 0\label{bxi}\\
+    \alpha_i \geq 0 ,\beta_i \geq 0,\xi_i \geq 0 
+\end{align}
+\end{subequations}
+ (\ref{sw})〜(\ref{sxi})式を計算すると，それぞれ(\ref{sw2})〜(\ref{sb2})式になる．
+ \begin{subequations}
+ \begin{align}
+   \boldsymbol{w} = \sum_{i=1}^{n}\alpha_i y_i \boldsymbol{w_i} \label{sw2}\\
+   \sum_{i=1}^{n}\alpha_i y_i = 0 \\
+   \alpha_i + \beta_i = C\label{sb2}
+ \end{align}
+\end{subequations}
+(\ref{sw2})〜(\ref{sb2})式を(\ref{slag})式に代入すると，
+$\boldsymbol{\alpha}$のみで表されるソフトマージンの双対問題が得られる．
+\begin{align}
+    \underset{\boldsymbol{a}}{\text{max}} \left\{\tilde{L}(\boldsymbol{\alpha}) 
+    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}
+    \alpha_i\alpha_j y_i y_j \boldsymbol{x_i}^T \boldsymbol{x_j}\right\} \nonumber \\
+    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0,0 \leq \alpha_i \leq C,\ (i=1,...,n)
+\end{align}
+識別関数はハードマージンSVMと同じく(\ref{s.decision}),(\ref{finalb})式になる．
+ただし，(\ref{sSupport})，(\ref{bxi}),(\ref{sb2})式により，$\alpha_i$に関して次の３つの場合がある．
 
+
+\subsection{カーネルトリック}
+カーネルトリック
 d次元特徴ベクトルをd`次元特徴空間に写像する
 
 →このときの関数
-\subsecton{カーネルトリック}
-カーネルトリック
-
 本論文で使うカーネル関数を列挙
 
 データの正規化
@@ -48,6 +214,6 @@ d次元特徴ベクトルをd`次元特徴空間に写像する
 一対一法と一対他法について
 
 →一対他法を使う
-
+\subsection{多クラス分類への拡張}
 
 

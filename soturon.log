@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  22 OCT 2024 15:42
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  25 OCT 2024 16:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -219,38 +219,45 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
 
 [1
 
-] (./intro.tex
+] (./intro.tex) [1
+
+] (./svm.tex
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 3.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 10.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 3.
-) [1
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 10.
+ [2
 
-] (./svm.tex [2
+] [3] [4] [5] [6]
+Overfull \hbox (21.82532pt too wide) in paragraph at lines 200--203
+\twlmin 識別関数はハ ードマ ージン \OT1/cmr/m/n/12 SVM \twlmin と同じく \OT1/cm
+r/m/n/12 (2.14),(2.15) \twlmin 式になる ． ただし ， \OT1/cmr/m/n/12 (2.20d)\tw
+lmin ， \OT1/cmr/m/n/12 (2.20e),(2.21c)
+ []
 
-]) [3] (./abc.tex [4
+) [7] (./abc.tex [8
 
-] [5]) [6] (./method.tex) [7
+] [9]) [10] (./method.tex) [11
 
-] (./result.tex) [8
-
-] (./kousatu.tex) [9
-
-] (./end.tex) [10
-
-] [11
-
-] [12
+] (./result.tex) [12
 
 ]
-(./soturon.aux) ) 
+(./kousatu.tex) [13
+
+] (./end.tex) [14
+
+] [15
+
+] [16
+
+] (./soturon.aux) ) 
 Here is how much of TeX's memory you used:
- 2526 strings out of 479850
- 36320 string characters out of 5887378
- 332119 words of memory out of 5000000
- 20809 multiletter control sequences out of 15000+600000
+ 2552 strings out of 479850
+ 36502 string characters out of 5887378
+ 338119 words of memory out of 5000000
+ 20835 multiletter control sequences out of 15000+600000
  500456 words of font info for 152 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
  55i,21n,62p,252b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on soturon.dvi (14 pages, 19492 bytes).
+Output written on soturon.dvi (18 pages, 35040 bytes).
