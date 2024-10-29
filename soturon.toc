@@ -3,14 +3,18 @@
 \contentsline {subsection}{\numberline {2.1}ハードマージンSVM}{2}{}%
 \contentsline {subsection}{\numberline {2.2}ソフトマージンSVM}{5}{}%
 \contentsline {subsection}{\numberline {2.3}カーネルトリック}{7}{}%
-\contentsline {subsection}{\numberline {2.4}多クラス分類への拡張}{7}{}%
-\contentsline {section}{\numberline {3}ABCアルゴリズム}{8}{}%
-\contentsline {subsection}{\numberline {3.1}概要}{8}{}%
-\contentsline {subsection}{\numberline {3.2}探索手順}{8}{}%
-\contentsline {section}{\numberline {4}提案手法}{11}{}%
-\contentsline {section}{\numberline {5}実験}{12}{}%
-\contentsline {subsection}{\numberline {5.1}実験結果}{12}{}%
-\contentsline {section}{\numberline {6}考察}{13}{}%
-\contentsline {section}{\numberline {7}おわりに}{14}{}%
-\contentsline {section}{謝辞}{15}{}%
-\contentsline {section}{参考文献}{16}{}%
+\contentsline {subsection}{\numberline {2.4}多クラス分類への拡張}{9}{}%
+\contentsline {section}{\numberline {3}ABCアルゴリズム}{10}{}%
+\contentsline {subsection}{\numberline {3.1}概要}{10}{}%
+\contentsline {subsection}{\numberline {3.2}探索手順}{10}{}%
+\contentsline {section}{\numberline {4}提案手法}{13}{}%
+\contentsline {subsection}{\numberline {4.1}ABCアルゴリズムの適用}{13}{}%
+\contentsline {subsection}{\numberline {4.2}提案手法のアルゴリズム}{14}{}%
+\contentsline {section}{\numberline {5}実験}{15}{}%
+\contentsline {subsection}{\numberline {5.1}データセット}{15}{}%
+\contentsline {subsection}{\numberline {5.2}実験パラメータ}{15}{}%
+\contentsline {subsection}{\numberline {5.3}実験結果}{15}{}%
+\contentsline {section}{\numberline {6}考察}{16}{}%
+\contentsline {section}{\numberline {7}おわりに}{17}{}%
+\contentsline {section}{謝辞}{18}{}%
+\contentsline {section}{参考文献}{19}{}%

@@ -1,7 +1,7 @@
 \section{サポートベクトルマシン(SVM)}
-SVMは1995年にCortesらによって提案された機械学習アルゴリズムである[\cite{svm}]．
-SVMは教師あり学習を用いる2値分類器であるが、多クラスへの拡張も可能である．
-SVMは，訓練サンプル集合からデータを分類する識別関数を学習するアルゴリズムである．
+SVMは1995年にCortesらによって提案された機械学習アルゴリズムである\cite{svm}．
+SVMは教師あり学習を用いる2値分類器であるが，多クラスへの拡張も可能である．
+SVMは，訓練サンプル集合からデータを分類する識別関数を学習する．
 この学習過程において，SVMは訓練データの中で識別関数に近いデータであるサポートベクトルを得る．
 そして，サポートベクトルと識別関数との距離，すなわちマージンを最大化するように識別関数を構築する．
 これにより，SVMは新しいデータを分類する際，
@@ -9,11 +9,11 @@ SVMは，訓練サンプル集合からデータを分類する識別関数を�
 未知のデータに対しても誤分類のリスクを最小限に抑えることができる．
 \subsection{ハードマージンSVM}
 $n$個の$N$次元教師データ$\boldsymbol{x}_i(i=1,...,n)$，
-がクラス$K_1$,$K_2$の2値分類データであるとして，
-対応するクラスラベルをクラス$K_1$の時に$y_i= 1$,
-クラス$K_2$の時に$y_i= -1$,とするとデータが線形分離可能であれば，
+がクラス$K_1$，$K_2$の2値分類データであるとして，
+対応するクラスラベルをクラス$K_1$の時に$y_i= 1$，
+クラス$K_2$の時に$y_i= -1$とすると，データが線形分離可能であれば
 識別関数は(\ref{decision})式のように定義される．
- $\boldsymbol{w}$は$m$次元ベクトル, $b$は識別関数のパラメータである．
+ $\boldsymbol{w}$は$m$次元ベクトル，$b$は識別関数のパラメータである．
 \begin{align}
     \label{decision}
 f(\boldsymbol{x}) = \boldsymbol{w}^T \boldsymbol{x} + b
@@ -33,8 +33,13 @@ $\boldsymbol{w}$, $b$を調節する事がSVMの学習フェーズとなる．
     \label{equal}
     y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b) \geq 1
 \end{align}
-ここにサポートベクトルと超平面（線）の図\\
-ここで図??にデータを分離する超平面(2次元では直線)を示す．
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{svm_support.png}
+    \caption{SVMの分類方法}
+    \label{svm_support}
+\end{figure}
+ここで図~\ref{svm_support}にデータを分離する超平面(2次元では直線)を示す．
 分離超平面とそれに最も近いデータ(サポートベクトル)との距離をマージンと呼び，
 SVMはマージンを最大化するように分離超平面を求める．
 マージンを最大化することで，
@@ -118,14 +123,16 @@ SVMは，教師データ中から，サポートベクトルのみを用いて�
  \end{align}
 \end{subequations}
 (\ref{w2})式， (\ref{b2})式を(\ref{lag})式に代入すると，
-$\boldsymbol{\alpha}$のみで表されるハードマージンの双対問題が得られる．
+(\ref{hard1})，(\ref{hard2})式の，$\boldsymbol{\alpha}$のみで表されるハードマージンの双対問題が得られる．
 これは線形分離可能な場合のみに適用でき，誤分類を許容しない．
+\begin{subequations}
 \begin{align}
     \underset{\boldsymbol{a}}{\text{max}} \left\{\tilde{L}(\boldsymbol{\alpha}) 
-    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}
-    \alpha_i\alpha_j y_i y_j \boldsymbol{x_i}^T \boldsymbol{x_j}\right\} \nonumber \\
-    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0, \alpha_i \geq 0,\ (i=1,...,n)
+    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}\label{hard1}
+    \alpha_i\alpha_j y_i y_j \boldsymbol{x_i}^T \boldsymbol{x_j}\right\}  \\
+    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0, \alpha_i \geq 0,\ (i=1,...,n)\label{hard2}
 \end{align}
+\end{subequations}
 ここで，サポートベクトルに対応する添字の集合をSとすると，(\ref{w2})式より，
 識別関数は(\ref{s.decision})式になる．
 \begin{align}
@@ -155,11 +162,13 @@ $D(\boldsymbol{x}) < 0$ならクラス$K_2$に分類する．
 小さいほど誤分類を許容し，大きいほど誤分類を許容しない．よって
 この問題は，(\ref{soft1})式の第１項のマージン最大化と
 第２項の誤分類の許容数のバランスを図る問題である．
+\begin{subequations}
 \begin{align}
     \underset{\boldsymbol{w},b,\boldsymbol{\xi}}{\text{min}}~\dfrac{1}{2}{\|\boldsymbol{{w}}\|}^2
     &+C\sum_{i=1}^{n}\xi_i \label{soft1}\\
    \text{subject to } y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b) \geq &1 - \xi_i,\xi_i \geq 0 ~(i=1,...,n)\label{soft2}
 \end{align}
+\end{subequations}
 2.1節と同様に，(\ref{soft1})式，(\ref{soft2})式を主問題として，ラグランジュの未定乗数法により双対問題を導出する．
 ラグランジュ乗数$\boldsymbol{\alpha} = (\alpha_1,...,\alpha_n)^T$，
 $\boldsymbol{\beta} = (\beta_1,...,\beta_n)^T$を用いて
@@ -191,29 +200,76 @@ $\boldsymbol{\beta} = (\beta_1,...,\beta_n)^T$を用いて
  \end{align}
 \end{subequations}
 (\ref{sw2})〜(\ref{sb2})式を(\ref{slag})式に代入すると，
-$\boldsymbol{\alpha}$のみで表されるソフトマージンの双対問題が得られる．
-\begin{align}
+$\boldsymbol{\alpha}$のみで表されるソフトマージンの双対問題(\ref{finalsoftmargin1})，(\ref{finalsoftmargin2})式が得られる．
+\begin{subequations}
+\begin{align} 
     \underset{\boldsymbol{a}}{\text{max}} \left\{\tilde{L}(\boldsymbol{\alpha}) 
-    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}
-    \alpha_i\alpha_j y_i y_j \boldsymbol{x_i}^T \boldsymbol{x_j}\right\} \nonumber \\
-    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0,0 \leq \alpha_i \leq C,\ (i=1,...,n)
+    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}\label{finalsoftmargin1}
+    \alpha_i\alpha_j y_i y_j \boldsymbol{x_i}^T \boldsymbol{x_j}\right\} \\
+    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0,0 \leq \alpha_i \leq C,\ (i=1,...,n)\label{finalsoftmargin2}
 \end{align}
-識別関数はハードマージンSVMと同じく(\ref{s.decision}),(\ref{finalb})式になる．
-ただし，(\ref{sSupport})，(\ref{bxi}),(\ref{sb2})式により，$\alpha_i$に関して次の３つの場合がある．
-
+\end{subequations}
+識別関数はハードマージンSVMと同じく(\ref{s.decision})，(\ref{finalb})式になる．
+よってソフトマージンSVMとハードマージンSVMの違いは，$\alpha_i$の上限$C$の有無だけの違いである，
+本研究ではハイパーパラメータである$C$を最適化対象に含める．
 
 \subsection{カーネルトリック}
-カーネルトリック
-d次元特徴ベクトルをd`次元特徴空間に写像する
-
-→このときの関数
-本論文で使うカーネル関数を列挙
-
-データの正規化
-
-一対一法と一対他法について
-
-→一対他法を使う
+2.2節で述べたソフトマージンSVMによって，非線形な問題に対しても分類できるようになったが， 
+非線形で複雑な分類問題に対しては高性能な分類器を構成できない．    
+そこでSVMは，$N$次元特徴ベクトルを$N^{\prime} $次元特徴空間に写像し，
+特徴空間上で分離超平面を得る．
+高次元空間への写像の例を図~\ref{syazou}に示す．
+この例では，$X_1X_2$の軸を新たに追加することによって元の次元では非線形なデータを線形分離可能にしている．
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{syazou.png}
+    \caption{高次元空間への写像の例}
+    \label{syazou}
+\end{figure}
+一般に，線形分離可能性はデータのサンプル数が多くなればなるほど難しくなり，
+特徴空間の次元数が大きくなるほど易しくなる．特に，$n-1$次元空間では，
+最大で$n$個のデータを任意のラベル付けで線形分離可能である．
+そのため$N$次元特徴ベクトルを$N^{\prime} $次元特徴空間に写像することで線形分離可能性が向上する．
+ここで，$N$次元特徴ベクトルを$N^{\prime} $次元特徴空間に写像する関数を
+$\boldsymbol{\phi}(\boldsymbol{x}) = \{\phi_i(\boldsymbol{x}),...,\phi_{N^{\prime}}(\boldsymbol{x})\}^T$
+とすると，特徴空間上での分離超平面は(\ref{feature1})，(\ref{feature2})式の最適化問題を解くことで得られる．
+\begin{subequations}
+\begin{align}  
+    \underset{\boldsymbol{a}}{\text{max}} \left\{\tilde{L}(\boldsymbol{\alpha}) 
+    = \sum_{i=1}^{n}\alpha_i - \dfrac{1}{2}\sum_{i,j=1}^{n}\label{feature1}
+    \alpha_i\alpha_j y_i y_j \boldsymbol{\phi}(\boldsymbol{x_i})^T \boldsymbol{\phi}(\boldsymbol{x_j})\right\}  \\
+    \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0,0 \leq \alpha_i \leq C,\ (i=1,...,n)\label{feature2}
+\end{align}
+\end{subequations}
+しかし次元$N^{\prime}$が大きくなればなるほど
+$\boldsymbol{\phi}(\boldsymbol{x_i})^T \boldsymbol{\phi}(\boldsymbol{x_j})$
+の計算量が膨大になる．
+そこでカーネル関数を(\ref{karnel})式で定義する．
+\begin{align}
+    \label{karnel}
+  K( \boldsymbol{x_i}, \boldsymbol{x_j}) = \boldsymbol{\phi}(\boldsymbol{x_i})^T \boldsymbol{\phi}(\boldsymbol{x_j})
+\end{align}
+もし，(\ref{karnel})式を満たすようなカーネル関数が存在するならば，入力特徴ベクトルの内積計算で
+$\boldsymbol{\phi}(\boldsymbol{x})$
+を得ることができる．すなわち計算量が膨大になる可能性がある
+$\boldsymbol{\phi}(\boldsymbol{x_i})^T \boldsymbol{\phi}(\boldsymbol{x_j})$
+を直接計算する必要がない．このように内積計算をカーネル関数で置き換える手法をカーネルトリックと呼ぶ．
+本実験では，(\ref{k1})〜(\ref{k4})式で表されるカーネル関数をハイパーパラメータの対象とする．
+また，(\ref{k1})〜(\ref{k4})式内にあるハイパーパラメータは$\gamma$，coef0，$d$の３つである．
+\begin{align}
+    \text{線形カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \boldsymbol{x_i}^T \cdot \boldsymbol{x_j}\label{k1} \\
+    \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right)\label{k2} \\
+    \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}) \label{k3}\\
+    \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0})^d\label{k4}
+\end{align}
+\\\\
+カーネル関数の条件を挙げるべきか(勉強不足)
 \subsection{多クラス分類への拡張}
-
+SVMは2値分類器であるが，1対他法や1対1法により多クラス分類への拡張ができる．
+1対他法では，各クラスに対し，そのクラスとそれ以外のクラスの分類をする．
+そのためクラスが$K$個ある場合，$K$個のSVMモデルを用意する必要がある．
+一方，1対1法では各クラスのペアの組み合わせに対して分類をする．
+そのためクラスが$K$個ある場合，$\frac{K(K-1)}{2}$個のSVMモデルを用意する必要がある．
+以上より，より計算量が少ないのが1対他法，より詳細な分類をするのが1対1法の特徴である．
+本研究では一対他法を使用する．
 
