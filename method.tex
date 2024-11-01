@@ -65,4 +65,50 @@ ABCにおける食物源の評価値$fit_i$は(\ref{fitness})式によって計�
     fit_i = \dfrac{1}{1+miss_i}
 \end{align}
 \subsection{提案手法のアルゴリズム}
-q
+提案手法のあるごりずむを以下に示す．
+\subsubsection*{step 0 準備}
+ABCにおけるパラメータである食物源の数$n$と探索上限回数$limit$の設定を行う．次に終了条件の設定を行なう．
+終了条件としては，アルゴリズムの反復回数が最大反復回数を超えたとき，
+最良の食物源の評価値もしくは目的関数値が一定値を超えたときなどがある．
+\subsubsection*{step 1 初期化}
+初期化では，(\ref{init})式によって各食物源を各成分の範囲内でランダムに生成する．
+さらに各食物源の探索回数$trial_i$を0に初期化する．
+$x_{ij}$は$\boldsymbol{x_{i}}$の$j(j=1,...,D)$番目の成分， 
+$xmin_j$，$xmax_j$はそれぞれ食物源の各成分の最小値，最大値である．また，$rand$は一様乱数を表す． 
+\begin{align}
+    x_{ij} = xmin_j + rand[0,1](xmax_j-xmin_j)\label{init}
+\end{align}
+初期化された食物源の中で最も評価値が高いものを$\boldsymbol{x}_{best}$とし，
+その食物源のインデックスを$i_{best}$とする
+\subsubsection*{step 2 収穫蜂フェーズ}
+収穫蜂フェーズでは収穫蜂が食物源の近傍を探索する．
+このときの更新式は（\ref{harvest}）式のようになる．
+ここで$j，k(k\neq i)$はランダムに選択される．
+\begin{align}
+v_{ij} = x_{ij} + rand[-1,1](x_{ij}-x_{kj})\label{harvest}
+\end{align}
+ここで$v_{ij}$と$x_{ij}$の評価値を比較し，$v_{ij}$が$x_{ij}$よりも優れていたら$x_{ij}$を$v_{ij}$に置き換え，
+$trial_i$を0にリセットする．
+そうでなければ，$trial_i$を1増やす．
+\subsubsection*{step 3 追従蜂フェーズ}
+追従蜂フェーズでは収穫蜂フェーズによって更新された食物源の評価値に基づいて，
+ルーレット選択を行い更新個体を選択する．
+食物源$x_i$の選択確率$p_i$は(\ref{roulette})式のようになる．
+そのため，評価値が高い食物源ほど選択確率が高く，評価値が低い食物源は選択確率が低くなる．
+食物源の更新は収穫蜂フェーズと同様に行われる．
+この操作を$n$回行う．
+\begin{align}
+    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit_j}\label{roulette}
+\end{align}
+\subsubsection*{step 4 偵察蜂フェーズ}
+偵察蜂フェーズでは，$trial$の値が探索打ち切り回数$limit$に達した
+食物源を(\ref{init})式によりランダムに生成した新たな解に置換する． 
+置換した食物源の$trial$を0にリセットする．
+$trial$の値が$limit$に達した
+食物源がなければ何も行わない．
+\subsubsection*{step 5 終了判定}
+各食物源の評価値$fit(\boldsymbol{x_{i}})$と，$fit(\boldsymbol{x}_{best})$を比較し，
+$fit(\boldsymbol{x_{i}}) > fit(\boldsymbol{x}_{best})$となる$\boldsymbol{x_{i}}$が存在する場合は
+$\boldsymbol{x}_{best}$を更新する．
+その後，終了条件を満たしている場合は最適解をその時の$\boldsymbol{x}_{best}$として探索を終了し，
+そうでない場合は\textbf{step 2}に戻り，探索を続ける．
