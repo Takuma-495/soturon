@@ -1,5 +1,146 @@
 \section{実験}
+侵入検知問題である10\%KDD'99データセットを使用して，
+scikit-learnのデフォルトパラメータ，既存手法，提案手法の間で表~\ref{tab:1}の設定で比較実験を行った．
+実験は，データセットからランダムに10\%抽出した学習セット，検証セット，テストセットの３つのデータセットを用意して行った．
+検証セットはABCアルゴリズムにおける解の評価に使われ，
+得られた最適解を未知のデータであるテストセットの分類に適用し
+，その結果を最終的な分類精度とする．
 \subsection{データセット}
-\subsection{実験パラメータ}
+10\%KDD'99データセットは，オリジナルのKDD'99データセットのうちサンプル数の多いnormal，
+dos，probeクラスを10\%に減らしたデータセットである．また，KDD'99データセットの特徴数は41個である．
+KDD'99データセットの内訳を表~\ref{kdd99}に示す．
+\begin{table}[tb]
+    \centering
+    \begin{minipage}{0.45\textwidth}  % 表の幅を指定
+        \centering
+        \caption{KDD'99データセットの内訳}  % 表のキャプション
+        \begin{tabular}{|l|r|r|}  % 左揃えと右揃えに変更
+          \hline  % 横線
+          クラス & KDD'99 & 10\%KDD'99 \\  % ヘッダー行
+          \hline  % 横線
+          normal & 972780 & 97279 \\  % 1行目
+          \hline  % 横線
+          dos & 3883370 & 391458 \\  % 2行目
+          \hline  % 横線
+          probe & 41102 & 4107 \\  % 3行目
+          \hline  % 横線
+          r2l & 1126 & 1126 \\  % 4行目
+          \hline  % 横線
+          u2r & 52 & 52 \\  % 5行目
+          \hline  % 横線
+          合計 & 4898430 & 494021 \\  % 合計行
+          \hline  % 横線
+        \end{tabular}
+        \label{kdd99}  % 表のラベル 
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}  % 表の幅を指定
+        \centering
+        \caption{実験データセットの内訳}  % 表のキャプション
+        \begin{tabular}{|c|c|c|c|}  % 列を定義
+          \hline  % 横線
+          クラス & 学習 & 検証 & テスト \\  % ヘッダー行
+          \hline  % 横線
+          normal & 9740 & 9650 & 9766 \\  % 1行目
+          \hline  % 横線
+          dos & 39127 & 39238 & 39106 \\  % 2行目
+          \hline  % 横線
+          probe & 412 & 385 & 410 \\  % 3行目
+          \hline  % 横線
+          r2l & 120 & 125 & 115 \\  % 4行目
+          \hline  % 横線
+          u2r & 3 & 4 & 5 \\  % 5行目
+          \hline  % 横線
+          合計 & 49402 & 49402 & 49402 \\  % 合計行
+          \hline  % 横線
+        \end{tabular}
+        \label{3kdd99}  % 表のラベル 
+    \end{minipage}
+  \end{table}
+本研究では，ABCで得られたSVMモデルが未知のデータに対して有効であるかを評価するために
+3つのデータセットを用意した\cite{origin}．3つのデータセットは，
+SVMの学習に使用する学習セット，SVMの評価に使用する検証セット，
+最適解を評価するためのテストセットである．
+ここでテストセットはABCで得られた最適解を評価するために一度だけ使用される．
+3つのデータセットを内訳を表~\ref{3kdd99}に示す．
+これらのデータセットは10\%KDD'99データセットからランダムに10\%抽出している．
+\subsection{実験設定}
+\subsubsection{実験環境}
+SVMの実装には，CPU:Intel Core i7-12700，メモリ32GBの計算機上で
+Python~3.11.0とscikit-learn~1.5.0ライブラリのSVCクラスを使用した．
+SVCクラスにおける本研究で使用するハイパーパラメータのデフォルト設定を表~\ref{default}に示す．
+ここでn\_featureはデータセットの特徴数を表す．
+\begin{table}[tb]
+    \centering
+    \caption{SVCクラスのデフォルト設定}
+    \begin{tabular}{|c|c|}  % 2列を定義
+      \hline  % 横線
+      パラメータ & デフォルト値 \\  % ヘッダー行    
+      \hline  % 横線
+      kernel & rbf\\  % 2行目
+      \hline  % 横線
+      $C$ & 1.0 \\  % 1行目
+      \hline  % 横線     
+      $\gamma$ & 1/n\_feature\\  % 3行目
+      \hline  % 横線
+      coef0 & 0\\  % 4行目
+      \hline  % 横線
+      degree($d$) & 3\\  % 4行目
+      \hline  % 横線
+  \end{tabular}
+     % 表のキャプション
+    \label{default}  % 表のラベル 
+  \end{table}
+\subsubsection{パラメータ設定}
+表~\ref{abc:param}，\ref{svm:param}に本研究のパラメータ設定を示す
+\begin{table}[tb]
+    \centering
+    \begin{minipage}{0.45\textwidth}  % 左側の表の幅
+      \centering
+      \caption{ABCの実験パラメータ}  % 表のキャプション
+      \begin{tabular}{|c|c|}  % 2列を定義
+        \hline  % 横線
+        コロニーサイズ & 20 \\  % ヘッダー行
+        \hline  % 横線
+        LIMIT & 100 \\  % 1行目
+        \hline  % 横線
+        サイクル数 & 500 \\  % 2行目
+        \hline  % 横線
+      \end{tabular}
+      \label{abc:param}  % 表のラベル 
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}  % 右側の表の幅
+      \centering
+      \caption{SVMの実験パラメータ}  % 表のキャプション
+      \begin{tabular}{|c|c|}  % 2列を定義
+        \hline  % 横線
+        kernel & [linear，rbf，sigmoid，poly] \\  % 2行目
+        \hline  % 横線
+        $C$ & [$10^{-6}$，35000] \\  % 1行目
+        \hline  % 横線     
+        $\gamma$ & [$10^{-6}$，32] \\  % 3行目
+        \hline  % 横線
+        coef0 & [0，10] \\  % 4行目
+        \hline  % 横線
+        degree($d$) & [1，3] \\  % 4行目
+        \hline  % 横線
+      \end{tabular}
+      \label{svm:param}  % 表のラベル 
+    \end{minipage}
+  \end{table}
 \subsection{実験結果}
-内容2
+実験結果を表~\ref{result}に示す．
+\begin{table}[h]
+    \centering
+    \caption{実験結果}  % 表のキャプション
+    \begin{tabular}{|c|c|c|c|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+        \hline  % 横線
+        ~ & 線形 &rbf &シグモイド&多項式&既存手法 & 提案手法\\  % ヘッダー行
+        \hline  % 横線
+        分類精度[\%]& 99.68&99.78&96.12&99.76&99.84& 99.90\\  % 1行目
+        \hline  % 横線
+        実行時間[h] & - & -&-&-&11.7& 7.0\\  % 2行目
+        \hline  % 横線
+    \end{tabular}
+   
+    \label{result}  % 表のラベル
+  \end{table}
