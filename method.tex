@@ -68,6 +68,14 @@ ABCにおける食物源の評価値$fit_i$は(\ref{fitness})式によって計�
 \subsection{提案手法のアルゴリズム}
 提案手法のアルゴリズムを以下に示す．
 ただし評価値の計算は次の手順で行われる．
+\begin{enumerate}
+    \item カーネル関数以外の値を(\ref{map})式でマッピング．
+    \item その食物源が多項式カーネルだった場合$d$の値を四捨五入．
+    \item 学習セットでsvmの学習を行う．
+    \item 検証セットでsvmの分類精度を算出．
+    \item (\ref{fitness})式で評価値の計算
+\end{enumerate}
+
 \subsubsection*{step 0 準備}
 ABCにおけるパラメータである食物源の数$n$と探索上限回数$limit$の設定を行う．
 次にSVNのハイパーパラメータ$C$，$\gamma$，coef0，$d$の探索範囲の設定を行い，
