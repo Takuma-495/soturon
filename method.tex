@@ -107,6 +107,15 @@ $trial_i$を0にリセットする．
 \begin{align}
     p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit_j}\label{roulette}
 \end{align}
+\subsubsection*{step 3 追従蜂フェーズ}
+追従蜂フェーズでは評価回数を減らすためにルーレット選択とは異なる手法に変更している．
+各食物源$x_i$に対して1回ずつの更新確率$1 - p_i$で食物源の更新を行う．
+確率未満の食料源は無視される．
+この操作を$n$回行う．
+そのため追従蜂の数は0~nでランダムである．
+\begin{align}
+    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit_j}\label{roulette}
+\end{align}
 \subsubsection*{step 4 偵察蜂フェーズ}
 偵察蜂フェーズでは，$trial$の値が探索打ち切り回数$limit$に達した
 食物源をstep 1 の初期化と同じ手順でランダムな新たな解に置換する． 
