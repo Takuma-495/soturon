@@ -61,7 +61,7 @@ $trial_i$を0にリセットする．
 食物源の更新は収穫蜂フェーズと同様に行われる．
 この操作を$n$回行う．
 \begin{align}
-    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit_j}\label{roulette}
+    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit(\boldsymbol{x_{j}})}\label{roulette}
 \end{align}
 \subsubsection*{step 4 偵察蜂フェーズ}
 偵察蜂フェーズでは，$trial$の値が探索打ち切り回数$limit$に達した

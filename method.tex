@@ -105,16 +105,17 @@ $trial_i$を0にリセットする．
 食物源の更新は収穫蜂フェーズと同様に行われる．
 この操作を$n$回行う．
 \begin{align}
-    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit_j}\label{roulette}
+    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit(\boldsymbol{x_{j}})}\label{roulette}
 \end{align}
 \subsubsection*{step 3 追従蜂フェーズ}
 追従蜂フェーズでは評価回数を減らすためにルーレット選択とは異なる手法に変更している．
 各食物源$x_i$に対して1回ずつの更新確率$1 - p_i$で食物源の更新を行う．
+食物源の更新は収穫蜂フェーズと同様に行われる．
 確率未満の食料源は無視される．
 この操作を$n$回行う．
-そのため追従蜂の数は0~nでランダムである．
+そのため追従蜂の数は0〜nでランダムである．
 \begin{align}
-    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit_j}\label{roulette}
+    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit(\boldsymbol{x_{j}})}\label{roulette}
 \end{align}
 \subsubsection*{step 4 偵察蜂フェーズ}
 偵察蜂フェーズでは，$trial$の値が探索打ち切り回数$limit$に達した
@@ -126,5 +127,6 @@ $trial$の値が$limit$に達した
 各食物源の評価値と，この時点で最良の食物源の評価値を比較し，
 $fit(\boldsymbol{x_{i}}) > fit(\boldsymbol{x}_{best})$となる$\boldsymbol{x_{i}}$が存在する場合は
 $\boldsymbol{x}_{best}$を更新する．
-その後，終了条件を満たしている場合は最適解をその時の$\boldsymbol{x}_{best}$として探索を終了し，
-そうでない場合は\textbf{step 2}に戻り，探索を続ける．
+その後，指定したサイクル数を満たしていない場合は\textbf{step 2}に戻り，探索を続ける．
+指定したサイクル数に達していた場合は，最適解をその時の$\boldsymbol{x}_{best}$として探索を終了し，
+$\boldsymbol{x}_{best}$を適用したSVMモデルのテストセットに対する分類精度を算出する．
