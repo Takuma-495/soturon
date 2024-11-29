@@ -1,7 +1,7 @@
 \section{実験}
 侵入検知問題である10\%KDD'99データセットを使用して，
-scikit-learnのデフォルトパラメータ，既存手法，提案手法の間で比較実験を行った．
-既存手法はカーネル関数をrbfに固定し，
+scikit-learnのデフォルトパラメータ，提案手法，提案手法の間で比較実験を行った．
+先行研究はカーネル関数をrbfに固定し，
 ABCアルゴリズムを使用してSVMの$C$と$\gamma$の最適化と特徴選択を行っている\cite{origin}．
 \subsection{データセット}
 10\%KDD'99データセットは，オリジナルのKDD'99データセットのうちサンプル数の多いnormal，
@@ -90,9 +90,9 @@ SVCクラスにおける本研究で使用するハイパーパラメータの�
   \end{table}
 \subsubsection{パラメータ設定}
 表~\ref{abc:param}，\ref{svm:param}に本研究のパラメータ設定を示す．
-表~\ref{abc:param}のABCにおけるパラメータは既存手法を参照し，
+表~\ref{abc:param}のABCにおけるパラメータは先行研究を参照し，
 両手法同じパラメータ設定である\cite{origin}．
-\ref{svm:param}のSVMのパラメータは既存手法では$C$，$\gamma$のみを扱う．
+\ref{svm:param}のSVMのパラメータは先行研究では$C$，$\gamma$のみを扱う．
 提案手法で新たに扱う4つのkernelは，SVCクラスにあるすべてのカーネル関数である．
 coef0，$d$の探索範囲は試行を重ねた上で調節した．
 
@@ -133,20 +133,85 @@ coef0，$d$の探索範囲は試行を重ねた上で調節した．
     \end{minipage}
   \end{table}
 \subsection{評価指標}
+本研究では，得られたSVMモデルの性能評価のため５つのクラスに対する分類精度に加えて，
+検知率，誤警報率，適合率，F値の4つの評価指標を算出する．
+これら4つの指標を得るために必要な値を以下に示す．
+ここで，通常状態のクラスはnormal，攻撃状態のクラスはdos，probe，r2l，u2rである．
+\begin{itemize}
+    \item 真陽性(TP)：攻撃状態として分類され，実際に攻撃状態だったデータ数
+    \item 真陰性(TN)：通常状態として分類され，実際に通常状態だったデータ数
+    \item 偽陽性(FP)：攻撃状態として分類され，実際には通常状態だったデータ数
+    \item 偽陰性(FN)：通常状態として分類され，実際には攻撃状態だったデータ数
+\end{itemize}
+TP，TN，FP，FNによって検知率，誤警報率，適合率，F値
+はそれぞれ(\ref{detect})〜(\ref{Fvalue})式で算出される．
+\setlength{\jot}{15pt}
+\begin{align}
+\text{検知率} &= \dfrac{TP}{TP + FN}\label{detect}\\
+\text{誤警報率} &= \dfrac{FP}{TN + FP}\\
+\text{適合率} &= \dfrac{TP}{TP + FP}\\
+\text{F値} &= \dfrac{2\text{*検知率*適合率}}{\text{検知率}+\text{適合率}}\label{Fvalue}
+\end{align}
+検知率は，攻撃状態を検知できた割合．
+誤警報率は，通常状態のデータを攻撃状態と分類した割合．
+適合率は，攻撃状態として分類され実際に攻撃状態だった割合．
+F値は検知率と適合率の調和平均である．
 \subsection{実験結果}
-実験結果を表~\ref{result}に示す．
+各カーネル関数におけるSVCクラスのデフォルトパラメータ，先行研究，提案手法で比較実験を行った結果を
+表~\ref{result1}に示す．ここで，線形，rbf，シグモイド，多項式はカーネル関数を指定し，SVCクラスのデフォルト
+パラメータを使用したものである．また，カーネル関数のデフォルト値はrbfである．
 \begin{table}[h]
     \centering
     \caption{実験結果}  % 表のキャプション
     \begin{tabular}{|c|c|c|c|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
         \hline  % 横線
-        ~ & 線形 &rbf &シグモイド&多項式&既存手法 & 提案手法\\  % ヘッダー行
+        ~ & 線形 &rbf &シグモイド&多項式&先行研究 & 提案手法\\  % ヘッダー行
         \hline  % 横線
         分類精度[\%]& 99.68&99.78&96.12&99.76&99.84& 99.89\\  % 1行目
         \hline  % 横線
         実行時間[h] & - & -&-&-&11.7& 13.6\\  % 2行目
         \hline  % 横線
     \end{tabular}
-   
-    \label{result}  % 表のラベル
+    \label{result1}  % 表のラベル
   \end{table}
+  先行研究と提案手法のTP，TN，FP，FNの値を表~\ref{result2}に示す．
+また，表~\ref{result2}から算出した検知率，誤警報率，適合率，F値を表~\ref{result3}に示す．
+\begin{table}
+
+\begin{minipage}[h]
+    \centering
+    \caption{実験結果}  % 表のキャプション
+    \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+        \hline  % 横線
+        ~ &先行研究 & 提案手法\\  % ヘッダー行
+        \hline  % 横線
+        TP& -& -\\  % 1行目
+        \hline  % 横線
+        TN & -& -\\  % 2行目
+        \hline  % 横線
+        FP & -& -\\  % 2行目
+        \hline  % 横線
+        FN& -& -\\  % 2行目
+        \hline  % 横線
+    \end{tabular}
+    \label{result2}  % 表のラベル
+\end{minipage}
+  \begin{minipage}[h]
+    \centering
+    \caption{実験結果}  % 表のキャプション
+    \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+        \hline  % 横線
+        ~ &先行研究 & 提案手法\\  % ヘッダー行
+        \hline  % 横線
+        検知率& -& -\\  % 1行目
+        \hline  % 横線
+        誤警報率 & -& -\\  % 2行目
+        \hline  % 横線
+        適合率 & -& -\\  % 2行目
+        \hline  % 横線
+        F値 & -& -\\  % 2行目
+        \hline  % 横線
+    \end{tabular}
+    \label{result3}  % 表のラベル
+  \end{minipage}
+\end{table}
