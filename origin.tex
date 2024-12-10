@@ -1,0 +1,26 @@
+\section{既存手法}
+先行研究として，ABCアルゴリズムを用いて
+SVMのハイパーパラメータ最適化と特徴選択を行った研究がある\cite{origin}．
+先行研究では，カーネル関数をrbfに固定してSVMのパラメータ$C$と，
+rbfのパラメータ$\gamma$の２つのパラメータを最適化対象としている．
+さらに特徴選択を行うため，データセットの特徴数を$N$とすると個体表現は(\ref{ori_expression})の$N+2$次元
+である．
+\begin{align}
+  \text{個体表現:} \quad  (\text{feature1,feature2,...,feature}N,~C,~\gamma)\label{ori_expression}
+\end{align}
+そして，各成分の値の範囲はすべて[0,1]であり，
+feature1,feature2,...,feature$N$に関しては0.5以上でその特徴を使用し0.5未満では使用しない．
+$C$と$\gamma$に関しては，成分の値を$a$とすると
+(\ref{map})式によってSVMに適用される値に変換される．
+\begin{align}
+  \label{map}
+  A =a(a_{max} -a_{min}) + a_{min}
+\end{align}
+ここで$a_{max}$，$a_{min}$はパラメータの上限値，下限値を表している．
+この方法により各成分の値の範囲をすべて[0,1]で表すことができるため実装が簡素になる
+ABCにおける食物源の評価値$fit_i$は(\ref{fitness})式によって計算される．
+ここで$miss_i$はSVMが分類を行い，誤分類した割合である．
+\begin{align}
+    \label{fitness}
+    fit_i = \dfrac{1}{1+miss_i}
+\end{align}
