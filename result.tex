@@ -145,13 +145,15 @@ coef0，$d$の探索範囲は試行を重ねた上で調節した．
 \end{itemize}
 TP，TN，FP，FNによって検知率，誤警報率，適合率，F値
 はそれぞれ(\ref{detect})〜(\ref{Fvalue})式で算出される．
-\setlength{\jot}{15pt}
+
+\setlength{\jot}{12pt}
 \begin{align}
 \text{検知率} &= \dfrac{TP}{TP + FN}\label{detect}\\
 \text{誤警報率} &= \dfrac{FP}{TN + FP}\\
 \text{適合率} &= \dfrac{TP}{TP + FP}\\
 \text{F値} &= \dfrac{2\text{*検知率*適合率}}{\text{検知率}+\text{適合率}}\label{Fvalue}
 \end{align}
+
 検知率は，攻撃状態を検知できた割合．
 誤警報率は，通常状態のデータを攻撃状態と分類した割合．
 適合率は，攻撃状態として分類され実際に攻撃状態だった割合．
@@ -160,10 +162,10 @@ F値は検知率と適合率の調和平均である．
 各カーネル関数におけるSVCクラスのデフォルトパラメータ，先行研究，提案手法で比較実験を行った結果を
 表~\ref{result1}に示す．ここで，線形，rbf，シグモイド，多項式はカーネル関数を指定し，SVCクラスのデフォルト
 パラメータを使用したものである．また，カーネル関数のデフォルト値はrbfである．
-\begin{table}[tb]
+\begin{table}[b]
     \centering
     \caption{実験結果}  % 表のキャプション
-    \begin{tabular}{|c|c|c|c|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+    \begin{tabular}{|c|c|c|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
         \hline  % 横線
         ~ & 線形 &rbf &シグモイド&多項式&先行研究 & 提案手法\\  % ヘッダー行
         \hline  % 横線
@@ -182,7 +184,7 @@ F値は検知率と適合率の調和平均である．
   \begin{minipage}{0.45\textwidth}  % 幅を指定
       \centering
       \caption{実験結果1}  % 表のキャプション
-      \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+      \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
           \hline  % 横線
           ~ &先行研究 & 提案手法\\  % ヘッダー行
           \hline  % 横線
@@ -200,7 +202,7 @@ F値は検知率と適合率の調和平均である．
   \begin{minipage}{0.45\textwidth}  % 幅を指定
       \centering
       \caption{実験結果2}  % 表のキャプション
-      \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+      \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
           \hline  % 横線
           ~ &先行研究 & 提案手法\\  % ヘッダー行
           \hline  % 横線

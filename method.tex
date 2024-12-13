@@ -26,7 +26,7 @@ SVMに適用される値に変換される．
 \begin{table}[t]
     \centering
     \caption{カーネル関数によるパラメータの活性，非活性}  % 表のキャプション
-    \begin{tabular}{|c|c|c|c|}  % 3列を定義（c: 中央揃え、|: 縦線）
+    \begin{tabular}{|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
         \hline  % 横線
         カーネル関数 & $\gamma$ & coef0 & $d$\\  % ヘッダー行
         \hline  % 横線
@@ -53,7 +53,7 @@ $\boldsymbol{x_j}$は$\boldsymbol{x_i}$と異なるカーネル関数を持つ�
     \label{karnel_update}
    P = \dfrac{f(\boldsymbol{x_j})}{f(\boldsymbol{x_i})+f(\boldsymbol{x_j})}
 \end{align}
-ABCにおける食物源の評価値$fit_i$は(\ref{fitness})式によって計算される．
+ABCにおける食物源の評価値は(\ref{fitness})式によって計算される．
 \subsection{提案手法のアルゴリズム}
 図~\ref{flowchart}にABCアルゴリズムによる最適化手順を示す．
 \begin{figure}
@@ -73,7 +73,7 @@ ABCアルゴリズムの詳細な手順を以下に示す．
 \end{enumerate}
 
 \subsubsection*{step 0 準備}
-ABCにおけるパラメータである食物源の数$n$と探索上限回数$limit$の設定を行う．
+ABCにおけるパラメータである食物源の数$n$と探索上限回数limitの設定を行う．
 次にSVNのハイパーパラメータ$C$，$\gamma$，coef0，$d$の探索範囲の設定を行い，
 ４つのカーネル関数を整数値にエンコードする．
 最後に終了条件であるアルゴリズムのサイクル数を設定する．
@@ -88,7 +88,7 @@ $n$個の食物源の評価値を計算し，
 このときの更新式は（\ref{harvest}）式のようになる．
 ここで$j，k(k\neq i)$はランダムに選択される．
 \begin{align}
-v_{ij} = x_{ij} + rand[-1,1](x_{ij}-x_{kj})
+v_{ij} = x_{ij} + \,mathrm{rand}[-1,1](x_{ij}-x_{kj})
 \end{align}
 ここで$v_{ij}$と$x_{ij}$の評価値を比較し，$v_{ij}$が$x_{ij}$よりも優れていたら$x_{ij}$を$v_{ij}$に置き換え，
 $trial_i$を0にリセットする．
@@ -101,7 +101,7 @@ $trial_i$を0にリセットする．
 食物源の更新は収穫蜂フェーズと同様に行われる．
 この操作を$n$回行う．
 \begin{align}
-    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit(\boldsymbol{x_{j}})}
+    p_i = \dfrac{\mathrm{fit}(\boldsymbol{x_{i}})}{\sum_{n}\mathrm{fit}(\boldsymbol{x_{j}})}
 \end{align}
 %\subsubsection*{step 3 追従蜂フェーズ}
 %追従蜂フェーズでは評価回数を減らすためにルーレット選択とは異なる手法に変更している．
@@ -110,18 +110,15 @@ $trial_i$を0にリセットする．
 %確率未満の食料源は無視される．
 %この操作を$n$回行う．
 %そのため追従蜂の数は0〜nでランダムである．
-\begin{align}
-    p_i = \dfrac{fit(\boldsymbol{x_{i}})}{\sum_{n}fit(\boldsymbol{x_{j}})}
-\end{align}
 \subsubsection*{step 4 偵察蜂フェーズ}
-偵察蜂フェーズでは，$trial$の値が探索打ち切り回数$limit$に達した
+偵察蜂フェーズでは，trialの値が探索打ち切り回数limitに達した
 食物源をstep 1 の初期化と同じ手順でランダムな新たな解に置換する． 
-置換した食物源の$trial$を0にリセットする．
-$trial$の値が$limit$に達した
+置換した食物源のtrialを0にリセットする．
+trialの値がlimitに達した
 食物源がなければ何も行わない．
 \subsubsection*{step 5 終了判定}
 各食物源の評価値と，この時点で最良の食物源の評価値を比較し，
-$fit(\boldsymbol{x_{i}}) > fit(\boldsymbol{x}_{best})$となる$\boldsymbol{x_{i}}$が存在する場合は
+$\mathrm{fit}(\boldsymbol{x_{i}}) > \mathrm{fit}(\boldsymbol{x}_{best})$となる$\boldsymbol{x_{i}}$が存在する場合は
 $\boldsymbol{x}_{best}$を更新する．
 その後，指定したサイクル数を満たしていない場合は\textbf{step 2}に戻り，探索を続ける．
 指定したサイクル数に達していた場合は，最適解をその時の$\boldsymbol{x}_{best}$として探索を終了し，

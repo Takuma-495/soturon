@@ -1,9 +1,9 @@
-\section{サポートベクトルマシン(SVM)}
+\section{サポートベクターマシン(SVM)}
 SVMは1995年にCortesらによって提案された機械学習アルゴリズムである\cite{svm}．
 SVMは教師あり学習を用いる2値分類器であるが，多クラスへの拡張も可能である．
 SVMは，訓練サンプル集合からデータを分類する識別関数を学習する．
-この学習過程において，SVMは訓練データの中で識別関数に近いデータであるサポートベクトルを得る．
-そして，サポートベクトルと識別関数との距離，すなわちマージンを最大化するように識別関数を構築する．
+この学習過程において，SVMは訓練データの中で識別関数に近いデータであるサポートベクターを得る．
+そして，サポートベクターと識別関数との距離，すなわちマージンを最大化するように識別関数を構築する．
 これにより，SVMは新しいデータを分類する際，
 最大限のマージンを持ってデータを分類できるようになり，
 未知のデータに対しても誤分類のリスクを最小限に抑えることができる．
@@ -40,10 +40,10 @@ $\boldsymbol{w}$, $b$を調節する事がSVMの学習フェーズとなる．
     \label{svm_support}
 \end{figure}
 ここで図~\ref{svm_support}にデータを分離する超平面(2次元では直線)を示す．
-分離超平面とそれに最も近いデータ(サポートベクトル)との距離をマージンと呼び，
+分離超平面とそれに最も近いデータ(サポートベクター)との距離をマージンと呼び，
 SVMはマージンを最大化するように分離超平面を求める．
 マージンを最大化することで，
-サポートベクトルから少しずれたデータが存在しても分類可能になり，
+サポートベクターから少しずれたデータが存在しても分類可能になり，
 モデルの汎化性能が向上する．
 次に，マージンを最大化する超平面を求める方法を導く．
 $\boldsymbol{x}_i$から超平面への距離を$d$とすると，
@@ -53,7 +53,7 @@ $d$は(\ref{distance})式のようになる．
 d = \dfrac{|f(\boldsymbol{x_i})|}{\|\boldsymbol{w}\| }
 \end{align}
 よって，マージンを$M$とすると，
-マージン最大化は(\ref{margin})式の最適化問題によって表現できる
+マージン最大化は(\ref{margin})式の最適化問題によって表現できる．
 \begin{align}
     \label{margin}
     \underset{{\boldsymbol{w},b}}{\text{max}}~M,~~ \text{subject to } \dfrac{y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)}{\|\boldsymbol{w}\|}
@@ -70,8 +70,8 @@ $\frac{b}{M\|\boldsymbol{w}\|}$
 \end{align}
 (\ref{chmargin})式の等号が成立するデータ
 $\boldsymbol{x_i}$は分離超平面と距離が最も近いデータ，
-すなわちサポートベクトルである．
-したがってマージン$\tilde{M}$は(\ref{newmargin})式のようになる
+すなわちサポートベクターである．
+したがってマージン$\tilde{M}$は(\ref{newmargin})式のようになる．
 \begin{align}
     \label{newmargin}
    \tilde{M} = \dfrac{1}{\|\boldsymbol{\tilde{w}}\|}
@@ -113,8 +113,8 @@ $\boldsymbol{\tilde{w}}$，$\tilde{b}$を改めて$\boldsymbol{w}$，$b$と表�
 \end{align}
 \end{subequations}
 (\ref{Support})式より，$\alpha_i = 0$または$\alpha_i > 0$で$y_i(\boldsymbol{w}^T \boldsymbol{x}_i + b)=1$
-が満たされなければならない．ここで，$\alpha_i > 0$となる$\boldsymbol{x_i}$をサポートベクトルと呼ぶ．
-SVMは，教師データ中から，サポートベクトルのみを用いて識別関数を構成する．
+が満たされなければならない．ここで，$\alpha_i > 0$となる$\boldsymbol{x_i}$をサポートベクターと呼ぶ．
+SVMは，教師データ中から，サポートベクターのみを用いて識別関数を構成する．
  (\ref{w})式， (\ref{b})式を計算すると，それぞれ(\ref{w2})式， (\ref{b2})式になる．
  \begin{subequations}
  \begin{align}
@@ -133,7 +133,7 @@ SVMは，教師データ中から，サポートベクトルのみを用いて�
     \text{subject to} \sum_{i=1}^{n}\alpha_i y_i = 0, \alpha_i \geq 0,\ (i=1,...,n)\label{hard2}
 \end{align}
 \end{subequations}
-ここで，サポートベクトルに対応する添字の集合をSとすると，(\ref{w2})式より，
+ここで，サポートベクターに対応する添字の集合をSとすると，(\ref{w2})式より，
 識別関数は(\ref{s.decision})式になる．
 \begin{align}
     \label{s.decision}
