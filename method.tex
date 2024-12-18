@@ -1,5 +1,5 @@
 \section{提案手法}
-先行研究では，カーネル関数をrbfに固定してハイパーパラメータ最適化を行っていた．
+先行研究では，カーネル関数をRBFカーネルに固定してハイパーパラメータ最適化を行っていた．
 しかし，
 本研究では，SVMのハイパーパラメータ$C$に加え，
 (\ref{k1})〜(\ref{k4})式の４つのカーネル関数とそのハイパーパラメータ($\gamma$，coef0，$d$)
@@ -55,19 +55,22 @@ $\boldsymbol{x_j}$は$\boldsymbol{x_i}$と異なるカーネル関数を持つ�
 \end{align}
 ABCにおける食物源の評価値は(\ref{fitness})式によって計算される．
 \subsection{提案手法のアルゴリズム}
-図~\ref{flowchart}にABCアルゴリズムによる最適化手順を示す．
+図~\ref{flowchart}に提案手法による最適化手順を示す．
 \begin{figure}
     \centering
     \includegraphics[width=0.4\linewidth]{flowchart.png}
     \caption{提案手法の最適化手順} 
     \label{flowchart}
 \end{figure}
-ABCアルゴリズムの詳細な手順を以下に示す．
+また，ABCアルゴリズムの詳細な手順を以下に示す．
 ただし評価値の計算は次の手順で行われる．
+探索範囲を広げたことにより，学習に時間がかかる個体が生成されるため
+svmの学習は100万イテレーションで打ち切ることとした．
+評価値は打ち切った時点の評価値を使用する．
 \begin{enumerate}
     \item カーネル関数以外の値を(\ref{map})式でマッピング．
     \item その食物源が多項式カーネルだった場合$d$の値を四捨五入．
-    \item 学習セットでsvmの学習を行う．
+    \item 学習セットでsvmの学習を行う(学習は100万イテレーションで打ち切り)．
     \item 検証セットでsvmの分類精度を算出．
     \item (\ref{fitness})式で評価値の計算
 \end{enumerate}
@@ -88,7 +91,7 @@ $n$個の食物源の評価値を計算し，
 このときの更新式は（\ref{harvest}）式のようになる．
 ここで$j，k(k\neq i)$はランダムに選択される．
 \begin{align}
-v_{ij} = x_{ij} + \,mathrm{rand}[-1,1](x_{ij}-x_{kj})
+v_{ij} = x_{ij} + \mathrm{rand}[-1,1](x_{ij}-x_{kj})
 \end{align}
 ここで$v_{ij}$と$x_{ij}$の評価値を比較し，$v_{ij}$が$x_{ij}$よりも優れていたら$x_{ij}$を$v_{ij}$に置き換え，
 $trial_i$を0にリセットする．
