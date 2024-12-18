@@ -177,57 +177,135 @@ F値は検知率と適合率の調和平均である．
     \end{tabular}
     \label{result1}  % 表のラベル
   \end{table}
+  protocol\_type，service，flag
   \begin{table}[htbp]
-    \centering
-    \caption{先行研究の特徴選択の最良の結果}
-    \begin{tabular}{|l|c|}
-        \hline
-        \textbf{特徴名} & \textbf{選択の有無} \\
-        \hline
-        duration & \(\times\) \\
-        protocol\_type & \(\times\) \\
-        service & \(\times\) \\
-        flag & \(\times\) \\
-        src\_bytes & \(\times\) \\
-        dst\_bytes & \(\times\) \\
-        land & \(\times\) \\
-        wrong\_fragment & \(\circ\) \\
-        urgent & \(\circ\) \\
-        hot & \(\circ\) \\
-        num\_failed\_logins & \(\times\) \\
-        logged\_in & \(\times\) \\
-        num\_compromised & \(\times\) \\
-        root\_shell & \(\times\) \\
-        su\_attempted & \(\times\) \\
-        num\_root & \(\times\) \\
-        num\_file\_creations & \(\circ\) \\
-        num\_shells & \(\circ\) \\
-        num\_access\_files & \(\circ\) \\
-        num\_outbound\_cmds & \(\times\) \\
-        is\_host\_login & \(\circ\) \\
-        is\_guest\_login & \(\circ\) \\
-        count & \(\circ\) \\
-        srv\_count & \(\circ\) \\
-        serror\_rate & \(\circ\) \\
-        srv\_serror\_rate & \(\circ\) \\
-        rerror\_rate & \(\times\) \\
-        srv\_rerror\_rate & \(\times\) \\
-        same\_srv\_rate & \(\circ\) \\
-        diff\_srv\_rate & \(\circ\) \\
-        srv\_diff\_host\_rate & \(\circ\) \\
-        dst\_host\_count & \(\times\) \\
-        dst\_host\_srv\_count & \(\times\) \\
-        dst\_host\_same\_srv\_rate & \(\circ\) \\
-        dst\_host\_diff\_srv\_rate & \(\circ\) \\
-        dst\_host\_same\_src\_port\_rate & \(\circ\) \\
-        dst\_host\_srv\_diff\_host\_rate & \(\circ\) \\
-        dst\_host\_serror\_rate & \(\circ\) \\
-        dst\_host\_srv\_serror\_rate & \(\circ\) \\
-        dst\_host\_rerror\_rate & \(\circ\) \\
-        dst\_host\_srv\_rerror\_rate & \(\circ\) \\
-        \hline
-    \end{tabular}
+  \setlength{\tabcolsep}{2pt} % 列間の間隔を調整
+  \renewcommand{\arraystretch}{0.8} % 行間を狭くする
+  \centering
+  \caption{ハイパーパラメータ最適化と特徴選択の結果(最良解)}
+  \begin{tabular}{|l|c|l|c|}
+      \hline
+      特徴名 & 選択の有無 & 特徴名 & 選択の有無   \\
+      \hline
+      duration & \(\times\) & is\_guest\_login & \(\circ\) \\
+      \hline
+      src\_bytes & \(\times\) & count & \(\circ\)  \\
+      \hline
+      dst\_bytes & \(\times\) & srv\_count & \(\circ\) \\
+      \cline{1-4} % 1〜4列目の線を引く
+      land & \(\times\) & serror\_rate & \(\circ\)  \\
+      \cline{1-4} % 1〜4列目の線を引く
+      wrong\_fragment & \(\circ\) & srv\_serror\_rate & \(\circ\)  \\
+      \cline{1-4} % 1〜4列目の線を引く
+      urgent & \(\circ\) & rerror\_rate & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      hot & \(\circ\) & srv\_rerror\_rate & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_failed\_logins & \(\times\) & same\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      logged\_in & \(\times\) & diff\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_compromised & \(\times\) & srv\_diff\_host\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      root\_shell & \(\times\) & dst\_host\_count & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      su\_attempted & \(\times\) & dst\_host\_srv\_count & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_root & \(\times\) & dst\_host\_same\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_file\_creations & \(\circ\) & dst\_host\_diff\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_shells & \(\circ\) & dst\_host\_same\_src\_port\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_access\_files & \(\circ\) & dst\_host\_srv\_diff\_host\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_outbound\_cmds & \(\times\) & dst\_host\_serror\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      is\_host\_login & \(\circ\) & dst\_host\_srv\_serror\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+  \end{tabular}
 \end{table}
+\begin{table}[htbp]
+  \setlength{\tabcolsep}{2pt} % 列間の間隔を調整
+  \renewcommand{\arraystretch}{0.8} % 行間を狭くする
+  \centering
+  \caption{ハイパーパラメータ最適化と特徴選択の結果(最悪解)}
+  \begin{tabular}{|l|c|l|c|}
+      \hline
+      特徴名 & 選択の有無 & 特徴名 & 選択の有無   \\
+      \hline
+      duration & \(\times\) & is\_guest\_login & \(\circ\) \\
+      \hline
+      src\_bytes & \(\times\) & count & \(\circ\) \\
+      \hline
+      dst\_bytes & \(\times\) & srv\_count & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      land & \(\times\) & serror\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      wrong\_fragment & \(\circ\) & srv\_serror\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      urgent & \(\circ\) & rerror\_rate & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      hot & \(\circ\) & srv\_rerror\_rate & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_failed\_logins & \(\times\) & same\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      logged\_in & \(\times\) & diff\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_compromised & \(\times\) & srv\_diff\_host\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      root\_shell & \(\times\) & dst\_host\_count & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      su\_attempted & \(\times\) & dst\_host\_srv\_count & \(\times\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_root & \(\times\) & dst\_host\_same\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_file\_creations & \(\circ\) & dst\_host\_diff\_srv\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_shells & \(\circ\) & dst\_host\_same\_src\_port\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_access\_files & \(\circ\) & dst\_host\_srv\_diff\_host\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      num\_outbound\_cmds & \(\times\) & dst\_host\_serror\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+      is\_host\_login & \(\circ\) & dst\_host\_srv\_serror\_rate & \(\circ\)   \\
+      \cline{1-4} % 1〜4列目の線を引く
+  \end{tabular}
+\end{table}
+
+\begin{table}[tb]
+  \begin{minipage}{0.45\textwidth}  % 幅を指定
+      \centering
+      \caption{最良解と最悪解(提案手法)}  % 表のキャプション
+      \begin{tabular}{|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+          \hline  % 横線
+          &$C$ &$\gamma$ &分類精度 \\  % ヘッダー行
+          \hline  % 横線
+        最良解& & 39602.4& \\  % 1行目
+          \hline  % 横線
+        最悪解 & &9743.8 &\\  % 2行目
+          \hline  % 横線
+      \end{tabular}
+      \label{myparam1}  % 表のラベル
+  \end{minipage} \hspace{1cm}  % 両表の間隔
+  \begin{minipage}{0.45\textwidth}  % 幅を指定
+      \centering
+      \caption{最良解と最悪解(先行研究)}  % 表のキャプション
+      \begin{tabular}{|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+          \hline  % 横線
+          &$C$ &$\gamma$ &分類精度 \\  % ヘッダー行
+          \hline  % 横線
+        最良解 && 39602.4& \\  % 1行目
+          \hline  % 横線
+        最悪解  &&9743.8 &\\  % 2行目
+          \hline  % 横線
+      \end{tabular}
+      \label{myparam2}  % 表のラベル
+  \end{minipage}
+\end{table}
+
+
+
   先行研究と提案手法のTP，TN，FP，FNの値を表~\ref{result2}に示す．ただし，小数点第2位を四捨五入している．
 また，表~\ref{result2}から算出した検知率，誤警報率，適合率，F値を表~\ref{result3}に示す．
 ただし，小数点第3位を四捨五入している．
@@ -237,7 +315,7 @@ F値は検知率と適合率の調和平均である．
   \centering
   \begin{minipage}{0.45\textwidth}  % 幅を指定
       \centering
-      \caption{実験結果1}  % 表のキャプション
+      \caption{混同行列の値}  % 表のキャプション
       \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
           \hline  % 横線
           ~ &先行研究 & 提案手法\\  % ヘッダー行
@@ -255,7 +333,7 @@ F値は検知率と適合率の調和平均である．
   \end{minipage} \hspace{1cm}  % 両表の間隔
   \begin{minipage}{0.45\textwidth}  % 幅を指定
       \centering
-      \caption{実験結果2}  % 表のキャプション
+      \caption{性能評価指標の結果}  % 表のキャプション
       \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
           \hline  % 横線
           ~ &先行研究 & 提案手法\\  % ヘッダー行
