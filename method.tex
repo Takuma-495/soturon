@@ -1,7 +1,6 @@
 \section{提案手法}
 先行研究では，カーネル関数をRBFカーネルに固定してハイパーパラメータ最適化を行っていた．
-しかし，
-本研究では，SVMのハイパーパラメータ$C$に加え，
+そこで，本研究ではSVMのハイパーパラメータ$C$に加え，
 (\ref{k1})〜(\ref{k4})式の４つのカーネル関数とそのハイパーパラメータ($\gamma$，coef0，$d$)
 を最適化対象とする手法を提案する．
 最適化アルゴリズムは設定パラメータの少ないABCを使用する．
@@ -51,7 +50,7 @@ SVMに適用される値に変換される．
 $\boldsymbol{x_j}$は$\boldsymbol{x_i}$と異なるカーネル関数を持つ個体の中からランダムに選ばれた個体である．
 \begin{align}
     \label{karnel_update}
-   P = \dfrac{f(\boldsymbol{x_j})}{f(\boldsymbol{x_i})+f(\boldsymbol{x_j})}
+   P = \dfrac{\mathrm{fit}(\boldsymbol{x_j})}{\mathrm{fit}(\boldsymbol{x_i})+\mathrm{fit}(\boldsymbol{x_j})}
 \end{align}
 ABCにおける食物源の評価値は(\ref{fitness})式によって計算される．
 \subsection{提案手法のアルゴリズム}

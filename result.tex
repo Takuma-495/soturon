@@ -3,7 +3,6 @@
 scikit-learnのデフォルトパラメータ，先行研究，提案手法の間で比較実験を行った．
 先行研究はカーネル関数をRBFカーネルに固定し，
 ABCアルゴリズムを使用してSVMの$C$と$\gamma$の最適化と特徴選択を行っている\cite{origin}．
-先行研究，提案手法の結果はそれぞれ10回ずつ実行し，平均値をとったものである．
 \subsection{データセット}
 10\%KDD'99データセットは，オリジナルのKDD'99データセットのうちサンプル数の多いnormal，
 dos，probeクラスを10\%に減らしたデータセットである．また，KDD'99データセットの特徴数は41個である．
@@ -160,9 +159,15 @@ F値は検知率と適合率の調和平均である．
 \subsection{実験結果}
 以下に示す先行研究と提案手法に関する結果はすべて，それぞれ10回ずつ実行した平均値である．
 各カーネル関数におけるSVCクラスのデフォルトパラメータ，先行研究，提案手法で比較実験を行った結果を
-表~\ref{result1}に示す．ただし，小数点第3位を四捨五入している．
+表~\ref{result1}に示す．ただし，分類精度は小数点第3位を，実行時間は小数点第2位を四捨五入している．
 また，線形，RBF，シグモイド，多項式はカーネル関数を指定し，SVCクラスのデフォルト
 パラメータを使用したものである．
+加えて，先行研究と提案手法のTP，TN，FP，FNの値を表~\ref{result2}に，
+表~\ref{result2}から算出した検知率，誤警報率，適合率，F値を表~\ref{result3}に示す．
+ただし，表~\ref{result2}の値は小数点第2位を，
+表~\ref{result3}の値は小数点第3位を四捨五入している．
+また，表~\ref{featuregood}〜\ref{myparam1}に，
+先行研究と提案手法で求まった最良解と最悪解を示す．
 \begin{table}[b]
     \centering
     \caption{実験結果}  % 表のキャプション
@@ -177,7 +182,45 @@ F値は検知率と適合率の調和平均である．
     \end{tabular}
     \label{result1}  % 表のラベル
   \end{table}
-  protocol\_type，service，flag
+  \begin{table}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth}  % 幅を指定
+        \centering
+        \caption{混同行列の値}  % 表のキャプション
+        \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+            \hline  % 横線
+            ~ &先行研究 & 提案手法\\  % ヘッダー行
+            \hline  % 横線
+            TP & 39602.4 & 39609.7\\  % 1行目
+            \hline  % 横線
+            TN & 9743.8 & 9748.9\\  % 2行目
+            \hline  % 横線
+            FP & 22.2 & 17.1\\  % 3行目
+            \hline  % 横線
+            FN & 33.6 & 26.3\\  % 4行目
+            \hline  % 横線
+        \end{tabular}
+        \label{result2}  % 表のラベル
+    \end{minipage} \hspace{1cm}  % 両表の間隔
+    \begin{minipage}{0.45\textwidth}  % 幅を指定
+        \centering
+        \caption{性能評価指標の結果}  % 表のキャプション
+        \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+            \hline  % 横線
+            ~ &先行研究 & 提案手法\\  % ヘッダー行
+            \hline  % 横線
+            検知率[\%] & 99.91 & 99.93\\  % 1行目
+            \hline  % 横線
+            誤警報率[\%] & 0.23 & 0.17\\  % 2行目
+            \hline  % 横線
+            適合率[\%] & 99.94 & 99.96\\  % 3行目
+            \hline  % 横線
+            F値[\%] & 99.93 & 99.95\\  % 4行目
+            \hline  % 横線
+        \end{tabular}
+        \label{result3}  % 表のラベル
+    \end{minipage}
+  \end{table}
   \begin{table}[htbp]
   \setlength{\tabcolsep}{2pt} % 列間の間隔を調整
   \renewcommand{\arraystretch}{0.8} % 行間を狭くする
@@ -226,6 +269,7 @@ F値は検知率と適合率の調和平均である．
     is\_guest\_login & \(\times\) & dst\_host\_srv\_rerror\_rate & \(\circ\)  \\
     \cline{1-4}
 \end{tabular}
+\label{featuregood} 
 \end{table}
 \begin{table}[htbp]
   \setlength{\tabcolsep}{2pt} % 列間の間隔を調整
@@ -275,24 +319,9 @@ F値は検知率と適合率の調和平均である．
       is\_guest\_login & \(\circ\) & dst\_host\_srv\_rerror\_rate & \(\circ\)  \\
       \cline{1-4}
   \end{tabular}
+  \label{featurebad} 
 \end{table}
-
-
-\begin{table}[tb]
-  \centering
-  \caption{最良解と最悪解(提案手法)}  % 表のキャプション
-  \begin{tabular}{|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
-      \hline  % 横線
-      &$C$ &$\gamma$ &分類精度[\%] \\  % ヘッダー行
-      \hline  % 横線
-    最良解&469.44&0.485&99.915\\  % 1行目
-      \hline  % 横線
-    最悪解 &95.63 &0.731&99.907\\  % 2行目
-      \hline  % 横線
-  \end{tabular}
-  \label{myparam1}  % 表のラベル
-\end{table}
-
+\clearpage
 \begin{table}[tb]
   \centering
   \caption{最良解と最悪解(先行研究)}  % 表のキャプション
@@ -307,48 +336,17 @@ F値は検知率と適合率の調和平均である．
   \end{tabular}
   \label{myparam2}  % 表のラベル
 \end{table}
-
-
-
-  先行研究と提案手法のTP，TN，FP，FNの値を表~\ref{result2}に示す．ただし，小数点第2位を四捨五入している．
-また，表~\ref{result2}から算出した検知率，誤警報率，適合率，F値を表~\ref{result3}に示す．
-ただし，小数点第3位を四捨五入している．
 \begin{table}[tb]
   \centering
-  \begin{minipage}{0.45\textwidth}  % 幅を指定
-      \centering
-      \caption{混同行列の値}  % 表のキャプション
-      \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
-          \hline  % 横線
-          ~ &先行研究 & 提案手法\\  % ヘッダー行
-          \hline  % 横線
-          TP & 39602.4 & 39609.7\\  % 1行目
-          \hline  % 横線
-          TN & 9743.8 & 9748.9\\  % 2行目
-          \hline  % 横線
-          FP & 22.2 & 17.1\\  % 3行目
-          \hline  % 横線
-          FN & 33.6 & 26.3\\  % 4行目
-          \hline  % 横線
-      \end{tabular}
-      \label{result2}  % 表のラベル
-  \end{minipage} \hspace{1cm}  % 両表の間隔
-  \begin{minipage}{0.45\textwidth}  % 幅を指定
-      \centering
-      \caption{性能評価指標の結果}  % 表のキャプション
-      \begin{tabular}{|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
-          \hline  % 横線
-          ~ &先行研究 & 提案手法\\  % ヘッダー行
-          \hline  % 横線
-          検知率[\%] & 99.91 & 99.93\\  % 1行目
-          \hline  % 横線
-          誤警報率[\%] & 0.23 & 0.17\\  % 2行目
-          \hline  % 横線
-          適合率[\%] & 99.94 & 99.96\\  % 3行目
-          \hline  % 横線
-          F値[\%] & 99.93 & 99.95\\  % 4行目
-          \hline  % 横線
-      \end{tabular}
-      \label{result3}  % 表のラベル
-  \end{minipage}
+  \caption{最良解と最悪解(提案手法)}  % 表のキャプション
+  \begin{tabular}{|c|c|c|c|}  % 3列を定義（c: 中央揃え，|: 縦線）
+      \hline  % 横線
+      &$C$ &$\gamma$ &分類精度[\%] \\  % ヘッダー行
+      \hline  % 横線
+    最良解&469.44&0.485&99.915\\  % 1行目
+      \hline  % 横線
+    最悪解 &95.63 &0.731&99.907\\  % 2行目
+      \hline  % 横線
+  \end{tabular}
+  \label{myparam1}  % 表のラベル
 \end{table}
