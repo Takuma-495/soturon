@@ -8,7 +8,7 @@ SVMは，訓練サンプル集合からデータを分類する識別関数を�
 最大限のマージンを持ってデータを分類できるようになり，
 未知のデータに対しても誤分類のリスクを最小限に抑えることができる．
 \subsection{ハードマージンSVM}
-$n$個の$N$次元教師データ$\boldsymbol{x}_i(i=1,...,n)$，
+$n$個の$N$教師データ$\boldsymbol{x}_i(i=1,...,n)$，
 がクラス$K_1$，$K_2$の2値分類データであるとして，
 対応するクラスラベルをクラス$K_1$の時に$y_i= 1$，
 クラス$K_2$の時に$y_i= -1$とすると，データが線形分離可能であれば
@@ -256,12 +256,12 @@ $\boldsymbol{\phi}(\boldsymbol{x})$
 $\boldsymbol{\phi}(\boldsymbol{x_i})^T \boldsymbol{\phi}(\boldsymbol{x_j})$
 を直接計算する必要がない．このように内積計算をカーネル関数で置き換える手法をカーネルトリックと呼ぶ．
 本実験では，(\ref{k1})〜(\ref{k4})式で表されるカーネル関数をハイパーパラメータの対象とする．
-また，(\ref{k1})〜(\ref{k4})式内にあるハイパーパラメータは$\gamma$，coef0，$d$の３つである．
+また，(\ref{k1})〜(\ref{k4})式内にあるハイパーパラメータは$\gamma_0,\gamma_1,\gamma_2，\text{coef0}_0,\text{coef0}_1，d$の6つである．
 \begin{align}
     \text{線形カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \boldsymbol{x_i}^T \cdot \boldsymbol{x_j}\label{k1} \\
-    \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right)\label{k2} \\
-    \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}) \label{k3}\\
-    \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0})^d\label{k4}
+    \text{RBFカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \exp\left(-\gamma_0 \| \boldsymbol{x_i} - \boldsymbol{x_j} \|^2\right)\label{k2} \\
+    \text{シグモイドカーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \tanh(\gamma_1 \boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}_0) \label{k3}\\
+    \text{多項式カーネル:} \quad K(\boldsymbol{x_i}, \boldsymbol{x_j}) &= (\gamma_2\boldsymbol{x_i}^T \cdot \boldsymbol{x_j} + \text{coef0}_1)^d\label{k4}
 \end{align}
 %カーネル関数の条件を挙げるべきか(勉強不足)
 \subsection{多クラス分類への拡張}

@@ -18,7 +18,8 @@
 \contentsline {subsubsection}{\numberline {6.2.2}パラメータ設定}{21}{}%
 \contentsline {subsection}{\numberline {6.3}評価指標}{22}{}%
 \contentsline {subsection}{\numberline {6.4}実験結果}{23}{}%
-\contentsline {section}{\numberline {7}考察}{28}{}%
-\contentsline {section}{\numberline {8}おわりに}{30}{}%
-\contentsline {section}{謝辞}{31}{}%
-\contentsline {section}{参考文献}{32}{}%
+\contentsline {subsection}{\numberline {6.5}データの有意性}{27}{}%
+\contentsline {section}{\numberline {7}考察}{29}{}%
+\contentsline {section}{\numberline {8}おわりに}{32}{}%
+\contentsline {section}{謝辞}{33}{}%
+\contentsline {section}{参考文献}{34}{}%

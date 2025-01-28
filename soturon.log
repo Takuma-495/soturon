@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.5.9)  22 DEC 2024 18:59
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  28 JAN 2025 11:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -239,7 +239,16 @@ File: syazou.png Graphic file (type bmp)
 
 ] [12]) [13] (./origin.tex) [14
 
-] (./method.tex [15
+] (./method.tex
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
+8.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
+ [15
 
 ]
 File: flowchart.png Graphic file (type bmp)
@@ -251,24 +260,25 @@ File: flowchart.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[23] [24] [25] [26]) [27] (./kousatu.tex [28
+[23] [24] [25] [26] [27
 
+]) [28] (./kousatu.tex [29
 
-]) [29] (./end.tex) [30
-
-] [31
-
-]
+]) [30] [31] (./end.tex)
 [32
+
+] [33
+
+] [34
 
 ] (./soturon.aux) ) 
 Here is how much of TeX's memory you used:
- 2620 strings out of 479850
- 37385 string characters out of 5887379
+ 2641 strings out of 479850
+ 37734 string characters out of 5887378
  356120 words of memory out of 5000000
- 20891 multiletter control sequences out of 15000+600000
+ 20909 multiletter control sequences out of 15000+600000
  500793 words of font info for 153 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
- 55i,21n,62p,252b,366s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,21n,62p,262b,421s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on soturon.dvi (35 pages, 102708 bytes).
+Output written on soturon.dvi (37 pages, 110332 bytes).
