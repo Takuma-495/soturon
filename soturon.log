@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  28 JAN 2025 11:34
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.25)  28 JAN 2025 14:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -275,10 +275,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Here is how much of TeX's memory you used:
  2641 strings out of 479850
  37734 string characters out of 5887378
- 356120 words of memory out of 5000000
+ 356119 words of memory out of 5000000
  20909 multiletter control sequences out of 15000+600000
  500793 words of font info for 153 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
  55i,21n,62p,262b,421s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on soturon.dvi (37 pages, 110332 bytes).
+Output written on soturon.dvi (37 pages, 110716 bytes).

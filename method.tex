@@ -61,6 +61,8 @@ SVMに適用される値に変換される．
 (\ref{karnel_update})式の確率$P$で更新されるものとする．
 ここで$\boldsymbol{x_i}$は更新個体，
 $\boldsymbol{x_j}$は$\boldsymbol{x_i}$と異なるカーネル関数を持つ個体の中からランダムに選ばれた個体である．
+例として，$\boldsymbol{x_i}$のカーネル関数の値が1で，$\boldsymbol{x_j}$のカーネル関数の値が2だった場合．
+確率$P$で$\boldsymbol{x_i}$のカーネル関数の値を1から2に更新する．
 \begin{align}
     \label{karnel_update}
    P = \dfrac{\mathrm{fit}(\boldsymbol{x_j})}{\mathrm{fit}(\boldsymbol{x_i})+\mathrm{fit}(\boldsymbol{x_j})}
